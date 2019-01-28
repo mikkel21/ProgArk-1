@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Exercise_1;
@@ -19,6 +20,8 @@ public class Heli {
     private int speed;
     private Animation heliAnimation;
     private Random rand;
+
+    private Rectangle bounds;
 
     public Heli(int x, int y) {
         Texture texture = new Texture("animation.png");
@@ -38,16 +41,28 @@ public class Heli {
         upHeading=((random%2)==0);
         random=rand.nextInt(3)+1;
         rightHeading=((random%2)==0);
+
+        bounds = new Rectangle(position.x,position.y,heli.getWidth(),heli.getHeight());
     }
 
-    public void update(float dt) {
+    public void update(float dt, Heli h2, Heli h3) {
         heliAnimation.update(dt);
 
         System.out.println("y: "+position.y+" x: "+position.x);
 
+        if(this.getBounds().overlaps(h2.getBounds()) || this.getBounds().overlaps(h3.getBounds())){
+            this.upHeading=!this.upHeading;
+            this.rightHeading=!this.rightHeading;
+        }
+
         this.moveY(speed*dt);
         this.moveX(speed*dt);
 
+        bounds.setPosition(position.x, position.y);
+    }
+
+    public Rectangle getBounds() {
+        return bounds;
     }
 
 
