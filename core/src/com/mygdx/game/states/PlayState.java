@@ -1,22 +1,32 @@
 package com.mygdx.game.states;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Exercise_1;
-import com.mygdx.game.sprites.Heli;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.sprites.Ball;
+import com.mygdx.game.sprites.PaddleLeft;
+import com.mygdx.game.sprites.PaddleRight;
+
 
 public class PlayState extends State {
-    private Heli heli1;
-    private Heli heli2;
-    private Heli heli3;
-    private Heli heli4;
+    private PaddleLeft paddleLeft;
+    private PaddleRight paddleRight;
+    private Ball ball;
+    private Texture bg;
+
+    private Vector2 score;
+    private BitmapFont font;
 
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        heli1 = new Heli(20,20);
-        heli2 = new Heli(Exercise_1.WIDTH-40,40);
-        heli3 = new Heli(Exercise_1.WIDTH-40,600);
+        paddleLeft = new PaddleLeft(30,30);
+        paddleRight = new PaddleRight(540,30);
+        ball = new Ball(300,150);
+        bg = new Texture("bg.png");
+        font = new BitmapFont();
+        score = new Vector2(0,0);
     }
 
     protected void handleInput() {
@@ -25,23 +35,31 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
-        handleInput();
-        heli1.update(dt, heli2, heli3);
-        heli2.update(dt, heli1, heli3);
-        heli3.update(dt, heli1, heli2);
+        paddleRight.update(dt);
+        paddleLeft.update(dt);
+        ball.update(dt,this);
     }
 
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-
-        sb.draw(heli1.getTexture(),heli1.getPosition().x, heli1.getPosition().y);
-
-        sb.draw(heli2.getTexture(),heli2.getPosition().x, heli2.getPosition().y);
-
-        sb.draw(heli3.getTexture(),heli3.getPosition().x, heli3.getPosition().y);
-
+        sb.draw(bg,0,0);
+        sb.draw(paddleRight.getTexture(),paddleRight.getPosition().x,paddleRight.getPosition().y);
+        sb.draw(paddleLeft.getTexture(),paddleLeft.getPosition().x,paddleLeft.getPosition().y);
+        sb.draw(ball.getTexture(),ball.getPosition().x,ball.getPosition().y,20,20);
+        font.draw(sb,"LEFT: " + ((int)this.score.x) + " RIGHT: " + ((int)this.score.y),250,590);
         sb.end();
+    }
+
+    public void setScore(Vector2 score){
+        this.score=score;
+    }
+
+    public void incRightScore() {
+        this.score.y +=0.5;
+    }
+    public void incLeftScore() {
+        this.score.x +=0.5;
     }
 
     @Override

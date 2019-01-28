@@ -9,10 +9,10 @@ import com.mygdx.game.states.PlayState;
 
 public class Exercise_1 extends ApplicationAdapter {
 
-	public static final int WIDTH=800;
-	public static final int HEIGHT=800;
+	public static final int WIDTH=600;
+	public static final int HEIGHT=600;
 
-	public static final String TITLE="Exercise 1";
+	public static final String TITLE="PONG";
 
 	private GameStateManager gsm;
 	private SpriteBatch batch;
@@ -21,7 +21,7 @@ public class Exercise_1 extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
-		Gdx.gl.glClearColor(1,0,0,1);
+		Gdx.gl.glClearColor(0,0,0,1);
 		gsm.push(new PlayState(gsm));
 	}
 
@@ -30,9 +30,5 @@ public class Exercise_1 extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render(batch);
-	}
-	
-	@Override
-	public void dispose () {
 	}
 }
