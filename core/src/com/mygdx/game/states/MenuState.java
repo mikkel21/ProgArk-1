@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Exercise_1;
 
 public class MenuState extends State{
-
     private Texture background;
     private Texture playBtn;
 
@@ -18,7 +17,7 @@ public class MenuState extends State{
 
     }
 
-    @Override
+
     protected void handleInput() {
         //TODO: implement so that different clicks of buttons renders different tasks
         if(Gdx.input.justTouched()){

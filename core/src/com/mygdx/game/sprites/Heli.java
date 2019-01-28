@@ -1,42 +1,75 @@
 package com.mygdx.game.sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Exercise_1;
 
 public class Heli {
     private Texture heli;
-    private Vector3 position;
+    private Vector2 position;
     private Sprite heliSprite;
     private boolean upHeading;
     private boolean rightHeading;
+    private int speed;
 
     public Heli(int x, int y) {
-        position = new Vector3(x,y,0);
+        position = new Vector2(x,y);
         heli = new Texture("heli1.png");
         heliSprite= new Sprite(heli);
         heliSprite.flip(true,false);
         upHeading = true;
         rightHeading = true;
+        speed = 100;
     }
+
+    public void update(float dt) {
+        System.out.println("y: "+position.y+" x: "+position.x);
+
+        moveToPos(dt);
+        /*
+        this.moveY(speed);
+        this.moveX(speed);
+        */
+    }
+
+    public void moveToPos(float dt) {
+        //IS CURRENTLY FOLLOWING THE MOUSE-POINTER
+
+        Vector2 mousePos = new Vector2(150,150);
+        //if (Gdx.input.justTouched()) {
+            mousePos.x = Gdx.input.getX();
+            mousePos.y = 800-Gdx.input.getY();
+        //}
+
+        if(mousePos.x > position.x) {
+            position.x +=speed*dt;
+        } else if (mousePos.x < position.x) {
+            position.x -= speed*dt;
+        }
+
+        if(mousePos.y > position.y) {
+            position.y +=speed*dt;
+        } else if (mousePos.y < position.y) {
+            position.y -= speed*dt;
+        }
+
 /*
-    public void moveToPos(float x, float y) {
-        if(x > position.x) {
+        float pathX = mousePos.x - position.x;
+        float pathY = mousePos.y - position.y;
 
-        }
-        else {
+        float distance = (float) Math.sqrt(pathX * pathX + pathY * pathY);
 
-        }
+        float directionX = pathX/distance;
+        float directionY = pathY/distance;
 
-        if(y > position.y) {
-
-        }
-        else {
-
-        }
+        position.x += directionX * speed;
+        position.y += directionY * speed;
+        */
     }
-    */
+
 
     public void moveX(int speed) {
         if(rightHeading) {
@@ -79,19 +112,11 @@ public class Heli {
         }
     }
 
-    public void update(float dt) {
-        System.out.println("y: "+position.y+" x: "+position.x);
-        int speed = 3;
-
-        this.moveY(speed);
-        this.moveX(speed);
-    }
-
     public Sprite getHeliSprite() {
         return heliSprite;
     }
 
-    public Vector3 getPosition() {
+    public Vector2 getPosition() {
         return position;
     }
 
