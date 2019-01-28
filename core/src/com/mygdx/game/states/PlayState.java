@@ -15,16 +15,13 @@ public class PlayState extends State {
         font = new BitmapFont();
     }
 
-    //@Override
     protected void handleInput() {
-        /*if(Gdx.input.justTouched()) {
-            heli.moveToPos();
-        }*/
+
     }
 
     @Override
     public void update(float dt) {
-        //handleInput();
+        handleInput();
         heli.update(dt);
     }
 
