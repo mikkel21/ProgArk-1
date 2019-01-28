@@ -37,7 +37,7 @@ public class PlayState extends State {
     public void update(float dt) {
         paddleRight.update(dt);
         paddleLeft.update(dt);
-        ball.update(dt,this);
+        ball.update(dt,this, paddleLeft, paddleRight);
     }
 
     @Override
@@ -56,10 +56,10 @@ public class PlayState extends State {
     }
 
     public void incRightScore() {
-        this.score.y +=0.5;
+        this.score.y ++;
     }
     public void incLeftScore() {
-        this.score.x +=0.5;
+        this.score.x ++;
     }
 
     @Override
