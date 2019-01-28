@@ -22,14 +22,14 @@ public class Ball {
         ball = new Texture("ball.png");
         upHeading = true;
         rightHeading = true;
-        speed = 100;
+        speed = 300;
         bounds = new Rectangle(position.x,position.y,20,20);
     }
 
     public void update(float dt, PlayState ps, PaddleLeft pl, PaddleRight pr) {
+        bounds.setPosition(position.x,position.y);
 
         if(bounds.overlaps(pl.getBounds()) || bounds.overlaps(pr.getBounds())){
-            this.upHeading=!this.upHeading;
             this.rightHeading=!this.rightHeading;
         }
 
@@ -75,7 +75,7 @@ public class Ball {
             position.y -= speed;
         }
 
-        if(upHeading && (position.y > 600)) { //         if(upHeading && (position.y > (Exercise_1.HEIGHT - ball.getHeight()))) {
+        if(upHeading && (position.y > 580)) { //         if(upHeading && (position.y > (Exercise_1.HEIGHT - ball.getHeight()))) {
             position.y -= speed;
             upHeading=false;
         }

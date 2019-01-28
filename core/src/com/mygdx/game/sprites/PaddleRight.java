@@ -24,6 +24,8 @@ public class PaddleRight {
     }
 
     public void update(float dt) {
+        bounds.setPosition(position.x,position.y);
+
         if (position.y < 0) {
             position.y = 0;
         }
@@ -32,10 +34,10 @@ public class PaddleRight {
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            position.y += 10;
+            position.y += 4;
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            position.y -= 10;
+            position.y -= 4;
         }
     }
 
