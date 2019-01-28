@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Exercise_1;
 
+import java.util.Random;
+
 public class Heli {
     private Texture heli;
     private Vector2 position;
@@ -16,6 +18,7 @@ public class Heli {
     private boolean rightHeading;
     private int speed;
     private Animation heliAnimation;
+    private Random rand;
 
     public Heli(int x, int y) {
         Texture texture = new Texture("animation.png");
@@ -26,9 +29,15 @@ public class Heli {
         heliSprite.flip(true,false);
 
         position = new Vector2(x,y);
-        upHeading = true;
-        rightHeading = true;
-        speed = 200;
+
+
+        rand = new Random();
+        int random = rand.nextInt(20)+1;
+        speed = 50*random;
+
+        upHeading=((random%2)==0);
+        random=rand.nextInt(3)+1;
+        rightHeading=((random%2)==0);
     }
 
     public void update(float dt) {
@@ -43,13 +52,13 @@ public class Heli {
 
 
     public void moveX(float speed) {
+
         if(rightHeading) {
             position.x += speed;
         }
         else {
             position.x -= speed;
         }
-
 
         if(rightHeading && (position.x > Exercise_1.WIDTH-heli.getWidth())) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
             position.x -= speed;
@@ -65,6 +74,7 @@ public class Heli {
     }
 
     public void moveY(float speed) {
+
         if(upHeading) {
             position.y += speed;
         }
