@@ -3,6 +3,7 @@ package com.mygdx.game.sprites;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Exercise_1;
@@ -14,18 +15,25 @@ public class Heli {
     private boolean upHeading;
     private boolean rightHeading;
     private int speed;
+    private Animation heliAnimation;
 
     public Heli(int x, int y) {
-        position = new Vector2(x,y);
+        Texture texture = new Texture("animation.png");
+        heliAnimation = new Animation(new TextureRegion(texture), 4, 0.4f);
         heli = new Texture("heli1.png");
+
         heliSprite= new Sprite(heli);
         heliSprite.flip(true,false);
+
+        position = new Vector2(x,y);
         upHeading = true;
         rightHeading = true;
         speed = 200;
     }
 
     public void update(float dt) {
+        heliAnimation.update(dt);
+
         System.out.println("y: "+position.y+" x: "+position.x);
 
         this.moveY(speed*dt);
@@ -46,13 +54,13 @@ public class Heli {
         if(rightHeading && (position.x > Exercise_1.WIDTH-heli.getWidth())) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
             position.x -= speed;
             rightHeading=false;
-            heliSprite.flip(true,false);
+            //heliSprite.flip(true,false);
         }
 
         if(!rightHeading && (position.x < 0)) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
             position.x += speed;
             rightHeading = true;
-            heliSprite.flip(true, false);
+            //heliSprite.flip(true, false);
         }
     }
 
@@ -83,7 +91,7 @@ public class Heli {
         return position;
     }
 
-    public Texture getTexture() {
-        return heli;
+    public TextureRegion getTexture() {
+        return heliAnimation.getFrame();
     }
 }
