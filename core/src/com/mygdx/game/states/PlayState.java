@@ -1,5 +1,6 @@
 package com.mygdx.game.states;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Exercise_1;
@@ -18,12 +19,15 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
-
+        if(Gdx.input.justTouched()) {
+            float x = Gdx.input.getX();
+            float y = Gdx.input.getY();
+        }
     }
 
     @Override
     public void update(float dt) {
-        handleInput();
+        //handleInput();
         heli.update(dt);
     }
 

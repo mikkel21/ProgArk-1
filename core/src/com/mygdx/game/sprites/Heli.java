@@ -20,18 +20,25 @@ public class Heli {
         upHeading = true;
         rightHeading = true;
     }
+/*
+    public void moveToPos(float x, float y) {
+        if(x > position.x) {
 
-    public void update(float dt) {
-        System.out.println("y: "+position.y+" x: "+position.x);
-        int speed = 3;
-
-        if(upHeading) {
-            position.y += speed;
         }
         else {
-            position.y -= speed;
+
         }
 
+        if(y > position.y) {
+
+        }
+        else {
+
+        }
+    }
+    */
+
+    public void moveX(int speed) {
         if(rightHeading) {
             position.x += speed;
         }
@@ -39,25 +46,45 @@ public class Heli {
             position.x -= speed;
         }
 
-        if(upHeading && (position.y > 300)) { //         if(upHeading && (position.y > (Exercise_1.HEIGHT - heli.getHeight()))) {
-            position.y -= speed;
-            upHeading=false;
-        }
+
         if(rightHeading && (position.x > 300)) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
             position.x -= speed;
             rightHeading=false;
             heliSprite.flip(true,false);
         }
+
+        if(!rightHeading && (position.x < 0)) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
+            position.x += speed;
+            rightHeading = true;
+            heliSprite.flip(true, false);
+        }
+    }
+
+    public void moveY(int speed) {
+        if(upHeading) {
+            position.y += speed;
+        }
+        else {
+            position.y -= speed;
+        }
+
+        if(upHeading && (position.y > 300)) { //         if(upHeading && (position.y > (Exercise_1.HEIGHT - heli.getHeight()))) {
+            position.y -= speed;
+            upHeading=false;
+        }
+
         if(!upHeading && (position.y < 0)) { //         if(upHeading && (position.y > (Exercise_1.HEIGHT - heli.getHeight()))) {
             position.y += speed;
             upHeading=true;
         }
-        if(!rightHeading && (position.x < 0)) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
-            position.x += speed;
-            rightHeading=true;
-            heliSprite.flip(true,false);
+    }
 
-        }
+    public void update(float dt) {
+        System.out.println("y: "+position.y+" x: "+position.x);
+        int speed = 3;
+
+        this.moveY(speed);
+        this.moveX(speed);
     }
 
     public Sprite getHeliSprite() {
