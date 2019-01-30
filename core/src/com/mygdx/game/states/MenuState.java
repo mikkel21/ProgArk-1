@@ -22,10 +22,10 @@ public class MenuState extends State{
     public MenuState(GameStateManager gsm) {
         super(gsm);
         //background = new Texture("bg.png");
-        button1 = new Button(350, 600, "one.png");
-        button2 = new Button(350, 450, "two.png");
-        button3 = new Button(350, 300, "three.png");
-        button4 = new Button(350, 150, "four.png");
+        button4 = new Button(350, 600, "one.png");
+        button3 = new Button(350, 450, "two.png");
+        button2 = new Button(350, 300, "three.png");
+        button1 = new Button(350, 150, "four.png");
 
         font = new BitmapFont();
     }
@@ -36,19 +36,19 @@ public class MenuState extends State{
         if(Gdx.input.justTouched()){
             Rectangle touch = new Rectangle(Gdx.input.getX(), Gdx.input.getY(),1,1);
             if(touch.overlaps(button1.getBounds())) {
-                gsm.set(new PlayState(gsm));
+                gsm.set(new PlayStateTask1(gsm));
                 System.out.println("button 1");
             }
             else if(touch.overlaps(button2.getBounds())) {
-                //gsm.set(new PlayState(gsm));
+                gsm.set(new PlayStateTask2(gsm));
                 System.out.println("button 2");
             }
             else if(touch.overlaps(button3.getBounds())) {
-                //gsm.set(new PlayState(gsm));
+                gsm.set(new PlayStateTask3(gsm));
                 System.out.println("button 3");
             }
             else if(touch.overlaps(button4.getBounds())) {
-                //gsm.set(new PlayState(gsm));
+                gsm.set(new PlayStateTask4(gsm));
                 System.out.println("button 4");
             }
             dispose();
