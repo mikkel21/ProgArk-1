@@ -1,8 +1,8 @@
 package com.mygdx.game.states;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Exercise_1;
+import com.mygdx.game.sprites.Button;
 import com.mygdx.game.sprites.Heli;
 
 public class PlayState extends State {
