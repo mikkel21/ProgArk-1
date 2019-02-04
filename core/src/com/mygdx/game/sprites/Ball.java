@@ -55,14 +55,14 @@ public class Ball {
             position.y = 290;
             rightHeading=false;
             upHeading=!upHeading;
-            ps.incRightScore();
+            ps.incLeftScore();
         }
         if(position.x < 0) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - ball.getWidth()))) {
             position.x = 290;
             position.y = 290;
             rightHeading=true;
             upHeading=!upHeading;
-            ps.incLeftScore();
+            ps.incRightScore();
         }
 
     }

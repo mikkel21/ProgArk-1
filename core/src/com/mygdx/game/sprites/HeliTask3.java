@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Exercise_1;
+import com.mygdx.game.states.PlayStateTask3;
 
 import java.util.Random;
 
@@ -23,29 +24,30 @@ public class HeliTask3 {
 
     private Rectangle bounds;
 
+    private PlayStateTask3 ps;
+
     public HeliTask3(int x, int y) {
         Texture texture = new Texture("animation.png");
         heliAnimation = new Animation(new TextureRegion(texture), 4, 0.4f);
         heli = new Texture("heli1.png");
-
-        heliSprite= new Sprite(heli);
-        heliSprite.flip(true,false);
 
         position = new Vector2(x,y);
 
 
         rand = new Random();
         int random = rand.nextInt(20)+1;
-        speed = 50*random;
+        speed = 20*random;
 
         upHeading=((random%2)==0);
         random=rand.nextInt(3)+1;
         rightHeading=((random%2)==0);
 
+
         bounds = new Rectangle(position.x,position.y,heli.getWidth(),heli.getHeight());
     }
 
-    public void update(float dt, HeliTask3 h2, HeliTask3 h3) {
+    public void update(PlayStateTask3 ps, float dt, HeliTask3 h2, HeliTask3 h3) {
+        this.ps = ps;
         heliAnimation.update(dt);
 
         System.out.println("y: "+position.y+" x: "+position.x);
@@ -59,6 +61,10 @@ public class HeliTask3 {
         this.moveX(speed*dt);
 
         bounds.setPosition(position.x, position.y);
+
+        if (rightHeading) {
+            ps.flip();
+        }
     }
 
     public Rectangle getBounds() {
@@ -78,13 +84,11 @@ public class HeliTask3 {
         if(rightHeading && (position.x > Exercise_1.WIDTH-heli.getWidth())) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
             position.x -= speed;
             rightHeading=false;
-            //heliSprite.flip(true,false);
         }
 
         if(!rightHeading && (position.x < 0)) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
             position.x += speed;
             rightHeading = true;
-            //heliSprite.flip(true, false);
         }
     }
 

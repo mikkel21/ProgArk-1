@@ -35,7 +35,7 @@ public class PlayStateTask2 extends State {
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(heli.getHeliSprite(),heli.getPosition().x, heli.getPosition().y);
-        font.draw(sb,"x,y: " + heli.getPosition().x + "," + heli.getPosition().y+"\nRress x to go back to menu",20,780);
+        font.draw(sb,"x,y: " + heli.getPosition().x + "," + heli.getPosition().y+"\nRress x to go back to menu\nThe heli follows the cursor",20,780);
         sb.end();
     }
 

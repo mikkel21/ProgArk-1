@@ -12,7 +12,8 @@ public class PlayStateTask3 extends State {
     private HeliTask3 heli1;
     private HeliTask3 heli2;
     private HeliTask3 heli3;
-    private HeliTask3 heli4;
+
+    private boolean flip;
 
     private BitmapFont font;
 
@@ -22,6 +23,8 @@ public class PlayStateTask3 extends State {
         heli1 = new HeliTask3(20,20);
         heli2 = new HeliTask3(Exercise_1.WIDTH-40,40);
         heli3 = new HeliTask3(Exercise_1.WIDTH-40,600);
+
+        flip=false;
 
         font = new BitmapFont();
     }
@@ -35,9 +38,14 @@ public class PlayStateTask3 extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        heli1.update(dt, heli2, heli3);
-        heli2.update(dt, heli1, heli3);
-        heli3.update(dt, heli1, heli2);
+        heli1.update(this,dt, heli2, heli3);
+        heli2.update(this,dt, heli1, heli3);
+        heli3.update(this,dt, heli1, heli2);
+    }
+
+    public void flip() {
+
+        //this.flip=true;
     }
 
     @Override
@@ -50,7 +58,7 @@ public class PlayStateTask3 extends State {
 
         sb.draw(heli3.getTexture(),heli3.getPosition().x, heli3.getPosition().y);
 
-        font.draw(sb,"Rress x to go back to menu",20,780);
+        font.draw(sb,"Press x to go back to menu",20,780);
 
         sb.end();
     }

@@ -14,6 +14,7 @@ public class HeliTask2 {
     private boolean upHeading;
     private boolean rightHeading;
     private int speed;
+    private boolean isFlipped;
 
     public HeliTask2(int x, int y) {
         position = new Vector2(x,y);
@@ -23,6 +24,7 @@ public class HeliTask2 {
         upHeading = true;
         rightHeading = true;
         speed = 100;
+        isFlipped=false;
     }
 
     public void update(float dt) {
@@ -83,12 +85,14 @@ public class HeliTask2 {
         if(rightHeading && (position.x > 300)) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
             position.x -= speed;
             rightHeading=false;
+            isFlipped=!isFlipped;
             heliSprite.flip(true,false);
         }
 
         if(!rightHeading && (position.x < 0)) { //         if(rightHeading && (position.x> (Exercise_1.WIDTH - heli.getWidth()))) {
             position.x += speed;
             rightHeading = true;
+            isFlipped=!isFlipped;
             heliSprite.flip(true, false);
         }
     }
