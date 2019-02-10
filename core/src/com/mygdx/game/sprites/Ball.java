@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.states.PlayState;
 
 public class Ball {
+    private static Ball ball_instance;
+
     private Texture ball;
     private Vector2 position;
     private boolean upHeading;
@@ -17,7 +19,7 @@ public class Ball {
     private Rectangle bounds;
 
 
-    public Ball(int x, int y) {
+    private Ball(int x, int y) {
         position = new Vector2(x,y);
         ball = new Texture("ball.png");
         upHeading = true;
@@ -92,5 +94,12 @@ public class Ball {
 
     public Texture getTexture() {
         return ball;
+    }
+
+    public static Ball getInstance(int x, int y) {
+        if (ball_instance == null) {
+            ball_instance = new Ball(x,y);
+        }
+        return ball_instance;
     }
 }

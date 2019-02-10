@@ -6,10 +6,11 @@ import com.mygdx.game.Exercise_1;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
+		Exercise_1 exercise_1 = Exercise_1.getInstance();
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width= Exercise_1.WIDTH;
-		config.height=Exercise_1.HEIGHT;
-		config.title=Exercise_1.TITLE;
-		new LwjglApplication(new Exercise_1(), config);
+		config.width= exercise_1.WIDTH;
+		config.height=exercise_1.HEIGHT;
+		config.title=exercise_1.TITLE;
+		new LwjglApplication(exercise_1, config);
 	}
 }

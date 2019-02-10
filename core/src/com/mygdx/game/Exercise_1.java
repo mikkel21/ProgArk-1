@@ -9,13 +9,21 @@ import com.mygdx.game.states.PlayState;
 
 public class Exercise_1 extends ApplicationAdapter {
 
-	public static final int WIDTH=600;
-	public static final int HEIGHT=600;
+	private static Exercise_1 exercise_1_instance = null;
 
-	public static final String TITLE="PONG";
+	public static int WIDTH;
+	public static int HEIGHT;
+
+	public static String TITLE;
 
 	private GameStateManager gsm;
 	private SpriteBatch batch;
+
+	private Exercise_1() {
+		WIDTH=600;
+		HEIGHT=600;
+		TITLE="PONG";
+	}
 
 	@Override
 	public void create () {
@@ -30,5 +38,12 @@ public class Exercise_1 extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render(batch);
+	}
+
+	public static Exercise_1 getInstance() {
+		if (exercise_1_instance == null) {
+			exercise_1_instance = new Exercise_1();
+		}
+		return exercise_1_instance;
 	}
 }

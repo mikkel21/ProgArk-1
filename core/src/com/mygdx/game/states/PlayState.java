@@ -21,9 +21,9 @@ public class PlayState extends State {
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
+        ball = Ball.getInstance(300,150);
         paddleLeft = new PaddleLeft(30,30);
         paddleRight = new PaddleRight(540,30);
-        ball = new Ball(300,150);
         bg = new Texture("bg.png");
         font = new BitmapFont();
         score = new Vector2(0,0);
