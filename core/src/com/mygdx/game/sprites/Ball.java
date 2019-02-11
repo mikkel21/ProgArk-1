@@ -7,7 +7,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.states.PlayState;
 
-public class Ball {
+import java.util.Observable;
+
+public class Ball extends Observable {
     //singleton
     private static Ball ball_instance;
 
@@ -27,6 +29,19 @@ public class Ball {
         rightHeading = true;
         speed = 300;
         bounds = new Rectangle(position.x,position.y,20,20);
+        //Observable methods:
+        setChanged();
+        notifyObservers(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Ball{" +
+                ", upHeading=" + upHeading +
+                ", rightHeading=" + rightHeading +
+                ", speed=" + speed +
+                "\n, position=" + position +
+                '}';
     }
 
     public void update(float dt, PlayState ps, PaddleLeft pl, PaddleRight pr) {
@@ -38,6 +53,9 @@ public class Ball {
 
         this.moveY(speed*dt);
         this.moveX(speed*dt, ps);
+        //Observable calls:
+        setChanged();
+        notifyObservers(this);
     }
 
     public Rectangle getBounds() {
@@ -101,6 +119,10 @@ public class Ball {
         if (ball_instance == null) {
             ball_instance = new Ball(x,y);
         }
+        return ball_instance;
+    }
+
+    public static Ball getInstance() {
         return ball_instance;
     }
 }

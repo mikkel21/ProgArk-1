@@ -5,8 +5,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.sprites.Ball;
+import com.mygdx.game.sprites.GameObserver;
 import com.mygdx.game.sprites.PaddleLeft;
 import com.mygdx.game.sprites.PaddleRight;
+
+import java.util.Observable;
 
 
 public class PlayState extends State {
@@ -17,6 +20,9 @@ public class PlayState extends State {
 
     private Vector2 score;
     private BitmapFont font;
+    private BitmapFont observer;
+    private GameObserver gameObserver;
+
 
 
     public PlayState(GameStateManager gsm) {
@@ -26,6 +32,14 @@ public class PlayState extends State {
         paddleRight = PaddleRight.getInstance(540,30);
         bg = new Texture("bg.png");
         font = new BitmapFont();
+
+        //observer/observable methods
+        observer = new BitmapFont();
+        gameObserver = new GameObserver();
+        ball.addObserver(gameObserver);
+        paddleLeft.addObserver(gameObserver);
+        paddleRight.addObserver(gameObserver);
+
         score = new Vector2(0,0);
     }
 
@@ -48,6 +62,8 @@ public class PlayState extends State {
         sb.draw(paddleLeft.getTexture(),paddleLeft.getPosition().x,paddleLeft.getPosition().y);
         sb.draw(ball.getTexture(),ball.getPosition().x,ball.getPosition().y,20,20);
         font.draw(sb,"LEFT: " + ((int)this.score.x) + " RIGHT: " + ((int)this.score.y),250,590);
+        System.out.println(gameObserver.toString());
+        font.draw(sb, gameObserver.toString(), 10, 750);
         sb.end();
     }
 

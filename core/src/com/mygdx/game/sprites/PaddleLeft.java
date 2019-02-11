@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class PaddleLeft {
+import java.util.Observable;
+
+public class PaddleLeft extends Observable {
     private Vector2 position;
     private Texture paddle;
 
@@ -19,6 +21,9 @@ public class PaddleLeft {
         if (paddle_instance == null) {
             paddle_instance = new PaddleLeft(x,y);
         }
+        return paddle_instance;
+    }
+    public static PaddleLeft getInstance(){
         return paddle_instance;
     }
 
@@ -49,6 +54,17 @@ public class PaddleLeft {
         else if(Gdx.input.isKeyPressed(Input.Keys.S)){
             position.y -= 4;
         }
+        //Observable methods:
+        setChanged();
+        notifyObservers(this);
+    }
+
+    @Override
+    public String toString() {
+        return "PaddleLeft{" +
+                "bounds=" + bounds +
+                ", position=" + position +
+                '}';
     }
 
     public Vector2 getPosition() {
