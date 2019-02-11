@@ -9,6 +9,7 @@ import com.mygdx.game.states.PlayState;
 
 public class Exercise_1 extends ApplicationAdapter {
 
+	//singleton: not really appropriate for this class?
 	private static Exercise_1 exercise_1_instance = null;
 
 	public static int WIDTH;

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.states.PlayState;
 
 public class Ball {
+    //singleton
     private static Ball ball_instance;
 
     private Texture ball;

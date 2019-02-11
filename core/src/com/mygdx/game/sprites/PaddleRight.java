@@ -12,7 +12,17 @@ public class PaddleRight {
 
     private Rectangle bounds;
 
-    public PaddleRight(int x, int y){
+    //singleton
+    private static PaddleRight paddle_instance;
+
+    public static PaddleRight getInstance(int x, int y) {
+        if (paddle_instance == null) {
+            paddle_instance = new PaddleRight(x,y);
+        }
+        return paddle_instance;
+    }
+
+    private PaddleRight(int x, int y){
         position=new Vector2(x,y);
         paddle = new Texture("paddle.png");
 
